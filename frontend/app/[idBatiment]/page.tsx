@@ -130,9 +130,11 @@ export default function BatimentPage() {
           <div className="flex-1">
             <SearchBar onSearch={handleSearch} placeholder="Rechercher une salle (Identifiant, fonction ou occupant)..." />
           </div>
-          <Button onClick={handleAdd}>
-            Ajouter une salle
-          </Button>
+          {isAuthenticated && (
+            <Button onClick={handleAdd}>
+              Ajouter une salle
+            </Button>
+          )}
         </div>
 
         {error ? (
@@ -161,9 +163,11 @@ export default function BatimentPage() {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Occupant
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
-                  </th>
+                  {isAuthenticated && (
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Actions
+                    </th>
+                  )}
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -181,20 +185,22 @@ export default function BatimentPage() {
                   <td className="px-6 py-4 whitespace-nowrap">{salle.idSalle}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{salle.fonction}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{salle.occupant || '-'}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right space-x-2 actions-container">
-                    <Button
-                      variant="edit"
-                      onClick={() => handleEdit(salle.idSalle)}
-                    >
-                      Modifier
-                    </Button>
-                    <Button
-                      variant="delete"
-                      onClick={() => setShowDeleteConfirmation(salle.idSalle)}
-                    >
-                      Supprimer
-                    </Button>
-                  </td>
+                  {isAuthenticated && (
+                    <td className="px-6 py-4 whitespace-nowrap text-right space-x-2 actions-container">
+                      <Button
+                        variant="edit"
+                        onClick={() => handleEdit(salle.idSalle)}
+                      >
+                        Modifier
+                      </Button>
+                      <Button
+                        variant="delete"
+                        onClick={() => setShowDeleteConfirmation(salle.idSalle)}
+                      >
+                        Supprimer
+                      </Button>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>

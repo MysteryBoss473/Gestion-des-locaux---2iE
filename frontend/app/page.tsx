@@ -105,9 +105,11 @@ export default function Home() {
           <div className="flex-1">
             <SearchBar onSearch={handleSearch} placeholder="Rechercher un bâtiment (Identifiant, site ou désignation)..." />
           </div>
-          <Button onClick={handleAdd}>
-            Ajouter un bâtiment
-          </Button>
+          {isAuthenticated && (
+            <Button onClick={handleAdd}>
+              Ajouter un bâtiment
+            </Button>
+          )}
         </div>
 
         {error ? (
@@ -136,9 +138,11 @@ export default function Home() {
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Désignation
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Actions
-                  </th>
+                  {isAuthenticated && (
+                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Actions
+                    </th>
+                  )}
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -151,30 +155,32 @@ export default function Home() {
                   <td className="px-6 py-4 whitespace-nowrap">{batiment.idBatiment}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{batiment.site}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{batiment.designation}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right space-x-2">
-                    <span 
-                      onMouseEnter={() => setIsActionButtonHovered(true)}
-                      onMouseLeave={() => setIsActionButtonHovered(false)}
-                    >
-                      <Button
-                        variant="edit"
-                        onClick={() => handleEdit(batiment.idBatiment)}
+                  {isAuthenticated && (
+                    <td className="px-6 py-4 whitespace-nowrap text-right space-x-2">
+                      <span 
+                        onMouseEnter={() => setIsActionButtonHovered(true)}
+                        onMouseLeave={() => setIsActionButtonHovered(false)}
                       >
-                        Modifier
-                      </Button>
-                    </span>
-                    <span
-                      onMouseEnter={() => setIsActionButtonHovered(true)}
-                      onMouseLeave={() => setIsActionButtonHovered(false)}
-                    >
-                      <Button
-                        variant="delete"
-                        onClick={() => setShowDeleteConfirmation(batiment.idBatiment)}
+                        <Button
+                          variant="edit"
+                          onClick={() => handleEdit(batiment.idBatiment)}
+                        >
+                          Modifier
+                        </Button>
+                      </span>
+                      <span
+                        onMouseEnter={() => setIsActionButtonHovered(true)}
+                        onMouseLeave={() => setIsActionButtonHovered(false)}
                       >
-                        Supprimer
-                      </Button>
-                    </span>
-                  </td>
+                        <Button
+                          variant="delete"
+                          onClick={() => setShowDeleteConfirmation(batiment.idBatiment)}
+                        >
+                          Supprimer
+                        </Button>
+                      </span>
+                    </td>
+                  )}
                 </tr>
               ))}
             </tbody>

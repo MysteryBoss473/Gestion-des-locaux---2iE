@@ -263,20 +263,22 @@ export default function SallePage() {
             </div>
           </div>
 
-          <div className="flex justify-end gap-4 pt-6">
-            <Button
-              variant="edit"
-              onClick={handleEdit}
-            >
-              Modifier
-            </Button>
-            <Button
-              variant="delete"
-              onClick={() => setShowDeleteConfirmation(true)}
-            >
-              Supprimer
-            </Button>
-          </div>
+          {isAuthenticated && (
+            <div className="flex justify-end gap-4 pt-6">
+              <Button
+                variant="edit"
+                onClick={handleEdit}
+              >
+                Modifier
+              </Button>
+              <Button
+                variant="delete"
+                onClick={() => setShowDeleteConfirmation(true)}
+              >
+                Supprimer
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Modal de confirmation de suppression */}
