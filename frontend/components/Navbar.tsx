@@ -1,6 +1,7 @@
 
 import { FC, useState, FormEvent, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import SearchIcon from './icons/SearchIcon';
 import SettingsIcon from './icons/SettingsIcon';
 import { useAuth } from '@/hooks/useAuth';
@@ -37,7 +38,14 @@ const Navbar: FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo et texte */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex items-center gap-3">
+            <Image
+              src="/images/2ie-logo.jpg"
+              alt="Logo 2iE"
+              width={40}
+              height={40}
+              className="rounded-full"
+            />
             <span className="text-white text-lg font-semibold">
               Gestion des locaux - 2iE
             </span>
